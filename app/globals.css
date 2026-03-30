@@ -71,17 +71,47 @@ body {
   }
 }
 
+@keyframes text-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 @layer utilities {
   .gradient {
-    @apply bg-gradient-to-b from-gray-400 via-gray-200 to-gray-600;
+    @apply bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400;
+    background-size: 200% auto;
   }
   .gradient-title {
     @apply gradient font-extrabold tracking-tighter text-transparent bg-clip-text pb-2 pr-2;
+  }
+  .animate-gradient {
+    animation: text-shimmer 3s ease-in-out infinite;
+  }
+}
+
+@keyframes wrapper-entry {
+  0% {
+    transform: scale(0.6) translateY(50px);
+    opacity: 0;
+    filter: blur(15px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    filter: blur(0);
   }
 }
 
 .hero-image-wrapper {
   perspective: 1000px;
+  animation: wrapper-entry 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
 }
 
 .hero-image {
